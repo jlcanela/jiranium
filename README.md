@@ -13,7 +13,7 @@ Add this to your SBT config:
 val jirafeSnaps = "jirafe.com snaps" at "https://raw.github.com/jirafe/mvn-repo/master/snapshots"
 
 // dependency
-val jiraniumPlay = "com.jirafe" %% "jiranium-play" % "1.0-SNAPSHOT"
+val jiraniumPlay = "com.jirafe" %% "jiranium-play" % "1.2-SNAPSHOT"
 ```
 
 Play2 utilities
@@ -39,13 +39,12 @@ See more parsers at play/src/main/scala/SqlParser.scala
 import jiranium.play.Query
 
 // insert in my_table
-Query.insert("my_table")('foo -> "omg", 'bar -> "ponies!!).execute()
+Query.insert("my_table")('foo -> "omg", 'bar -> "ponies!!").execute()
 
 // is equivalent to:
-SQL("""insert into my_table (foo, bar) values ({foo}, {bar})""").on(
-  'foo -> "omg",
-  'bar -> "ponies!!"
-)
+SQL("""insert into %s (foo, bar) values ({foo}, {bar})""" format "my_table")
+.on('foo -> "omg", 'bar -> "ponies!!")
+.execute()
 ```
 
 how to publish to jirafe/mvn-repo

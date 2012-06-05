@@ -12,9 +12,7 @@ trait Query {
   // Does not insert anything.
   // Instead, returns a Sql object with an execute()
   // method that performs the insert.
-  // usage:
-  // Query.insert("my_table")('foo -> "omg", 'bar -> "ponies!!).execute()
-  def insert(tableName: String)(args: (Any, ParameterValue[_])*): Sql = {
+  def insert(tableName: String)(args: (Any, ParameterValue[_])*): SimpleSql[_] = {
     val fields = args map {
       case (s: Symbol, _) ⇒ s.name
       case (k, _)         ⇒ k.toString
