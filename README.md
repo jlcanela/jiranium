@@ -3,6 +3,20 @@ jiranium
 
 A set of reusable components we use in our scala programs
 
+installation
+------------
+
+Add this to your SBT config:
+
+```scala
+// resolver
+val jirafeSnaps = "jirafe.com snaps" at "https://raw.github.com/jirafe/mvn-repo/master/snapshots"
+
+// dependency
+val jiraniumPlay = "com.jirafe" %% "jiranium-play" % "1.0-SNAPSHOT"
+```
+
+
 how to publish to jirafe/mvn-repo
 ---------------------------------
 
