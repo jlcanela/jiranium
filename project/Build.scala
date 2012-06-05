@@ -6,7 +6,7 @@ object JiraniumBuild extends Build {
   lazy val play = Project("jiranium-play", file("play")) settings (
     organization := "com.jirafe",
     name := "jiranium-play",
-    version := "1.0-SNAPSHOT",
+    version := "1.1-SNAPSHOT",
     scalaVersion := "2.9.1",
     libraryDependencies ++= Seq(
       "play" %% "play" % "2.0.1",
@@ -14,10 +14,8 @@ object JiraniumBuild extends Build {
       scalacOptions := Seq("-deprecation", "-unchecked"),
       publishTo <<= version { (v: String) ⇒
         val base = Path.userHome.absolutePath + "/.m2/repository"
-        val local = if (v.trim.endsWith("SNAPSHOT"))
-          base + "/snapshots"
-        else
-          base + "/releases"
+        val local = if (v.trim.endsWith("SNAPSHOT")) base + "/snapshots"
+        else base + "/releases"
         Some(Resolver.file("file", new File(local)))
       }
   )
