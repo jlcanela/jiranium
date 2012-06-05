@@ -1,9 +1,9 @@
-jiranium
+Jiranium
 ========
 
-A set of reusable components we use in our scala programs
+A set of reusable components we use in our scala programs.
 
-installation
+Installation
 ------------
 
 Add this to your SBT config:
@@ -27,9 +27,9 @@ Anorm
 ```scala
 import jiranium.play.SqlParsers._
 
-  val mapping =
-    optInt("my_table.plan_id") ~ // parses an Option[Int]
-    dateTime("my_table.created_t_stamp") // parses a joda.org.time.DateTime
+val mapping =
+  optInt("my_table.plan_id") ~ // parses an Option[Int]
+  dateTime("my_table.created_t_stamp") // parses a joda.org.time.DateTime
 ```
 See more parsers at play/src/main/scala/SqlParser.scala
 
@@ -47,7 +47,7 @@ SQL("""insert into %s (foo, bar) values ({foo}, {bar})""" format "my_table")
 .execute()
 ```
 
-how to publish to jirafe/mvn-repo
+How to publish to jirafe/mvn-repo
 ---------------------------------
 
 This section is intended to Jirafe developers.
@@ -57,5 +57,7 @@ Then publish and push to github mvn-repo:
     sbt publish
     cd /path/to/mvn-repo
     cp -r ~/.m2/repository/snapshots/com/jirafe/jiranium-play_2.9.1/* snapshots/com/jirafe/jiranium-play_2.9.1/
+    git add snapshots/com/jirafe/jiranium-play_2.9.1/
     git commit -m "publish jiranium"
     git push
+    cd -
