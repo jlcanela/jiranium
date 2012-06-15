@@ -10,10 +10,10 @@ Add this to your SBT config:
 
 ```scala
 // resolver
-val jirafeSnaps = "jirafe.com snaps" at "https://raw.github.com/jirafe/mvn-repo/master/snapshots"
+val jirafeSnaps = "jirafe.com" at "https://raw.github.com/jirafe/mvn-repo/master/releases"
 
 // dependency
-val jiraniumPlay = "com.jirafe" %% "jiranium-play" % "1.2-SNAPSHOT"
+val jiraniumAnorm = "com.jirafe" %% "jiranium-anorm" % "1.0"
 ```
 
 Play2 utilities
@@ -25,7 +25,7 @@ Anorm
 ### Sql parsers
 
 ```scala
-import jiranium.play.SqlParsers._
+import jiranium.anorm.SqlParsers._
 
 val mapping =
   optInt("my_table.plan_id") ~ // parses an Option[Int]
@@ -36,7 +36,7 @@ See more parsers at play/src/main/scala/SqlParser.scala
 ### Query utilities
 
 ```scala
-import jiranium.play.Query
+import jiranium.anorm.Query
 
 // insert in my_table
 Query.insert("my_table")('foo -> "omg", 'bar -> "ponies!!").execute()
@@ -56,8 +56,8 @@ Then publish and push to github mvn-repo:
 
     sbt publish
     cd /path/to/mvn-repo
-    cp -r ~/.m2/repository/snapshots/com/jirafe/jiranium-play_2.9.1/* snapshots/com/jirafe/jiranium-play_2.9.1/
-    git add snapshots/com/jirafe/jiranium-play_2.9.1/
+    cp -r ~/.m2/repository/releases/com/jirafe/jiranium-anorm_2.9.1/* releases/com/jirafe/jiranium-anorm_2.9.1/
+    git add releases/com/jirafe/jiranium-anorm_2.9.1/
     git commit -m "publish jiranium"
     git push
     cd -
