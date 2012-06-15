@@ -9,6 +9,8 @@ object Query extends Query
 
 trait Query {
 
+  import implicits._
+
   // Does not insert anything.
   // Instead, returns a Sql object with an execute()
   // method that performs the insert.

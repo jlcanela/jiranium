@@ -1,8 +1,10 @@
-package jiranium
+package jiranium.anorm
 
-import _root_.anorm.Sql
+import anorm.Sql
 
-package object anorm {
+object implicits extends implicits
+
+trait implicits {
 
   implicit def richString(str: String) = new {
 
