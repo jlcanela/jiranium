@@ -47,6 +47,17 @@ SQL("""insert into %s (foo, bar) values ({foo}, {bar})""" format "my_table")
 .execute()
 ```
 
+### Implicits
+
+```scala
+import jiranium.anorm.implicits._
+
+// String.formatSql
+"select a.omg, b.ponies from %s a, %s b".formatSql("table1", table2")
+
+// is equivalent to:
+SQL("select a.omg, b.ponies from %s a, %s b".format("table1", table2"))
+
 How to publish to jirafe/mvn-repo
 ---------------------------------
 
