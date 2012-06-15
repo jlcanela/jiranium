@@ -1,8 +1,8 @@
 package jiranium
 
-import anorm.Sql
+import _root_.anorm.Sql
 
-package object play {
+package object anorm {
 
   implicit def richString(str: String) = new {
 

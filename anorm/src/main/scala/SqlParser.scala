@@ -1,4 +1,4 @@
-package jiranium.play
+package jiranium.anorm
 
 import anorm.{ SqlParser ⇒ AnormSqlParser, _ }
 import org.joda.time.DateTime

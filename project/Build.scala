@@ -3,10 +3,10 @@ import Keys._
 
 object JiraniumBuild extends Build {
 
-  lazy val play = Project("jiranium-play", file("play")) settings (
+  lazy val anorm = Project("jiranium-anorm", file("anorm")) settings (
     organization := "com.jirafe",
-    name := "jiranium-play",
-    version := "1.3",
+    name := "jiranium-anorm",
+    version := "1.0",
     scalaVersion := "2.9.1",
     resolvers ++= Seq(
       "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"),

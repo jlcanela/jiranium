@@ -1,4 +1,4 @@
-package jiranium.play
+package jiranium.anorm
 
 import play.api.db._
 import anorm._
@@ -17,10 +17,10 @@ trait Query {
       case (s: Symbol, _) ⇒ s.name
       case (k, _)         ⇒ k.toString
     }
-    SQL("""insert into %s (%s) values (%s)""".format(
+    "insert into %s (%s) values (%s)".formatSql(
       tableName,
       fields mkString ", ",
       fields map ("{"+_+"}") mkString ", "
-    )).on(args: _*)
+    ).on(args: _*)
   }
 }
