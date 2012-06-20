@@ -35,6 +35,8 @@ See more parsers at play/src/main/scala/SqlParser.scala
 
 ### Query utilities
 
+#### Query.insert
+
 ```scala
 import jiranium.anorm.Query
 
@@ -45,6 +47,12 @@ Query.insert("my_table")('foo -> "omg", 'bar -> "ponies!!").execute()
 SQL("""insert into %s (foo, bar) values ({foo}, {bar})""" format "my_table")
 .on('foo -> "omg", 'bar -> "ponies!!")
 .execute()
+```
+
+#### Query.timestamp
+
+```
+Query.timestamp(dateTime: DateTime): java.sql.Timestamp
 ```
 
 ### Implicits

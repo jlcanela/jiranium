@@ -3,7 +3,8 @@ package jiranium.anorm
 import play.api.db._
 import anorm._
 import anorm.SqlParser._
-import java.sql.Connection
+import java.sql.{ Connection, Timestamp }
+import org.joda.time.DateTime
 
 object Query extends Query
 
@@ -25,4 +26,6 @@ trait Query {
       fields map ("{"+_+"}") mkString ", "
     ).on(args: _*)
   }
+
+  def timestamp(date: DateTime) = new Timestamp(date.getMillis)
 }
