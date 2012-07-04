@@ -24,13 +24,17 @@ trait Query {
       case ((k, t), _) ⇒ toS(k) -> Some(toS(t))
       case (k, _)      ⇒ toS(k) -> None
     }
+    val params = args map {
+      case ((k, _), v) ⇒ toS(k) -> v
+      case (k, v)      ⇒ toS(k) -> v
+    }
     "insert into %s (%s) values (%s)".formatSql(
       tableName,
       fields map (_._1) mkString ", ",
       fields map {
         case (name, typ) ⇒ "{" + name + "}" + (typ getOrElse "")
       } mkString ", "
-    ).on(args: _*)
+    ).on(params: _*)
   }
 
   def timestamp(date: DateTime) = new Timestamp(date.getMillis)
