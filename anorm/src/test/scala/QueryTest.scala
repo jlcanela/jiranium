@@ -20,6 +20,9 @@ object QueryTest extends Specification {
       "interval" in {
         insert('a -> "* '1s'::interval" -> "b").sql.query must_== "insert into t (a) values (?* '1s'::interval)"
       }
+      "typed with a question mark" in {
+        insert('a -> "?::uuid" -> "b").sql.query must_== "insert into t (a) values (?::uuid)"
+      }
     }
     "query args" in {
       "simple" in {
@@ -34,6 +37,11 @@ object QueryTest extends Specification {
       }
       "typed" in {
         insert('a -> "::uuid" -> "b").params.headOption must beSome.like {
+          case ("a", param) ⇒ param.aValue.toString must_== "b"
+        }
+      }
+      "typed with question mark" in {
+        insert('a -> "?::uuid" -> "b").params.headOption must beSome.like {
           case ("a", param) ⇒ param.aValue.toString must_== "b"
         }
       }

@@ -8,7 +8,7 @@ import org.joda.time.DateTime
 
 object Query extends Query
 
-trait Query {
+trait Query extends scalaz.Options with scalaz.Booleans with scalaz.Identitys {
 
   import implicits._
 
@@ -20,9 +20,11 @@ trait Query {
       case x: Symbol ⇒ x.name
       case x         ⇒ x.toString
     }
+    def cast(typeOption: Option[String]) =
+      typeOption.fold(t ⇒ t.startsWith("?").fold(t drop 1, t), "")
     val fields: Seq[(String, Option[String])] = args map {
-      case ((k, t), _) ⇒ toS(k) -> Some(toS(t))
-      case (k, _)      ⇒ toS(k) -> None
+      case ((k, t), _) ⇒ toS(k) -> toS(t).some
+      case (k, _)      ⇒ toS(k) -> none
     }
     val params = args map {
       case ((k, _), v) ⇒ toS(k) -> v
@@ -32,7 +34,7 @@ trait Query {
       tableName,
       fields map (_._1) mkString ", ",
       fields map {
-        case (name, typ) ⇒ "{" + name + "}" + (typ getOrElse "")
+        case (name, typ) ⇒ "{" + name + "}" + cast(typ)
       } mkString ", "
     ).on(params: _*)
   }
