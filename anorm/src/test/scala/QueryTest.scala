@@ -4,7 +4,7 @@ import org.specs2.mutable.Specification
 
 object QueryTest extends Specification {
 
-  val insert = Query.insert("t") _ 
+  val insert = Query.insert("t") _
 
   "Insert" should {
     "query string" in {
@@ -19,6 +19,23 @@ object QueryTest extends Specification {
       }
       "interval" in {
         insert('a -> "* '1s'::interval" -> "b").sql.query must_== "insert into t (a) values (?* '1s'::interval)"
+      }
+    }
+    "query args" in {
+      "simple" in {
+        insert('a -> "b").params.headOption must beSome.like {
+          case ("a", param) ⇒ param.aValue.toString must_== "b"
+        }
+      }
+      "multi value" in {
+        insert('a -> "b", 'c -> "d").params.lastOption must beSome.like {
+          case ("c", param) ⇒ param.aValue.toString must_== "d"
+        }
+      }
+      "typed" in {
+        insert('a -> "::uuid" -> "b").params.headOption must beSome.like {
+          case ("a", param) ⇒ param.aValue.toString must_== "b"
+        }
       }
     }
   }
