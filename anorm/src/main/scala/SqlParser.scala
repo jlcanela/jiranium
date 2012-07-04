@@ -28,4 +28,16 @@ object SqlParser {
 
   def opt[T](columnName: String)(implicit extractor: anorm.Column[T]): RowParser[Option[T]] =
     get[Option[T]](columnName)
+
+  object postgresql {
+
+    implicit def pgObjectToString: Column[String] = Column.nonNull { (value, meta) ⇒
+      val MetaDataItem(qualified, nullable, clazz) = meta
+      value match {
+        case obj: org.postgresql.util.PGobject ⇒ Right(obj.getValue)
+        case _ ⇒ Left(TypeDoesNotMatch(
+          "Cannot convert " + value + ":" + value.asInstanceOf[AnyRef].getClass + " to String for column " + qualified))
+      }
+    }
+  }
 }
