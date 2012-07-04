@@ -49,6 +49,15 @@ SQL("""insert into %s (foo, bar) values ({foo}, {bar})""" format "my_table")
 .execute()
 ```
 
+It also supports type cast
+
+```scala
+Query.insert("my_table") {
+  'user_id -> "::uuid" -> userId,
+  'offset -> "* '1s'::interval" -> offset
+}
+```
+
 #### Query.timestamp
 
 ```
