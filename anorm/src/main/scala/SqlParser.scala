@@ -27,12 +27,12 @@ object SqlParser {
 
   def optLong(columnName: String): RowParser[Option[Long]] = opt[Long](columnName)
 
-  def opt[T](columnName: String)(implicit extractor: anorm.Column[T]): RowParser[Option[T]] =
+  def opt[T](columnName: String)(implicit extractor: Column[T]): RowParser[Option[T]] =
     get[Option[T]](columnName)
 
   object postgresql {
 
-    implicit def pgObjectToString: Column[String] = Column.nonNull { (value, meta) ⇒
+    val enumToString: Column[String] = Column.nonNull { (value, meta) ⇒
       val MetaDataItem(qualified, nullable, clazz) = meta
       value match {
         case obj: org.postgresql.util.PGobject ⇒ Right(obj.getValue)
@@ -40,5 +40,7 @@ object SqlParser {
           "Cannot convert " + value + ":" + value.asInstanceOf[AnyRef].getClass + " to String for column " + qualified))
       }
     }
+
+    def enum(columnName: String) = AnormSqlParser.scalar[String](enumToString)
   }
 }
