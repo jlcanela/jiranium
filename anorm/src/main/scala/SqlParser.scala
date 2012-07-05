@@ -17,8 +17,9 @@ object SqlParser {
     }
   }
 
-  def dateTime(columnName: String): RowParser[DateTime] =
-    get[DateTime](columnName)(implicitly[Column[DateTime]])
+  def dateTime(columnName: String): RowParser[DateTime] = get[DateTime](columnName)
+
+  def optDateTime(columnName: String): RowParser[Option[DateTime]] = opt[DateTime](columnName)
 
   def optStr(columnName: String): RowParser[Option[String]] = opt[String](columnName)
 

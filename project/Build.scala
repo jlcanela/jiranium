@@ -6,7 +6,7 @@ object JiraniumBuild extends Build {
   lazy val anorm = Project("jiranium-anorm", file("anorm")) settings (
     organization := "com.jirafe",
     name := "jiranium-anorm",
-    version := "1.6",
+    version := "1.7",
     scalaVersion := "2.9.1",
     resolvers ++= Seq(
       "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"),
