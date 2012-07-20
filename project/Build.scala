@@ -6,12 +6,13 @@ object JiraniumBuild extends Build {
   lazy val anorm = Project("jiranium-anorm", file("anorm")) settings (
     organization := "com.jirafe",
     name := "jiranium-anorm",
-    version := "1.9",
+    version := "2.0",
     scalaVersion := "2.9.1",
     resolvers ++= Seq(
-      "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"),
+      "Typesafe releases" at "http://repo.typesafe.com/typesafe/releases/",
+      "Typesafe snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"),
       libraryDependencies ++= Seq(
-        "play" %% "play" % "2.0.1",
+        "play" %% "play" % "2.1-SNAPSHOT",
         "org.scalaz" %% "scalaz-core" % "6.0.4",
         "org.specs2" %% "specs2" % "1.11" % "test"),
         scalacOptions := Seq("-deprecation", "-unchecked"),
