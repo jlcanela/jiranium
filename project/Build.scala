@@ -12,7 +12,9 @@ object JiraniumBuild extends Build {
       "Typesafe releases" at "http://repo.typesafe.com/typesafe/releases/",
       "Typesafe snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"),
       libraryDependencies ++= Seq(
-        "play" %% "play" % "2.1-SNAPSHOT",
+        "play" %% "anorm" % "2.1-SNAPSHOT",
+        "joda-time" % "joda-time" % "2.0",
+        "org.joda" % "joda-convert" % "1.2",
         "org.scalaz" %% "scalaz-core" % "6.0.4",
         "org.specs2" %% "specs2" % "1.11" % "test"),
         scalacOptions := Seq("-deprecation", "-unchecked"),

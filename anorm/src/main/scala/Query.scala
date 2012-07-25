@@ -1,6 +1,5 @@
 package jiranium.anorm
 
-import play.api.db._
 import anorm._
 import anorm.SqlParser._
 import java.sql.{ Connection, Timestamp }
